@@ -16,37 +16,45 @@ export interface FlexProps extends BaseLayoutProps {
 }
 
 export function Flex(props: FlexProps) {
+  const {
+    tag, children, className, style,
+    direction, justify, align, wrap, gap,
+    fullWidth, fullHeight,
+    ...rest
+  } = props
+
   return React.createElement(
-    props.tag || 'div',
+    tag || 'div',
     {
+      ...rest,
       className: cn(
         s.flex,
         s[props.position || 'static'],
         {
-          [s.flexRow]: props.direction === 'row',
-          [s.flexColumn]: props.direction === 'column',
-          [s.flexJustifyStart]: props.justify === 'start',
-          [s.flexJustifyEnd]: props.justify === 'end',
-          [s.flexJustifyCenter]: props.justify === 'center',
-          [s.flexJustifyBetween]: props.justify === 'between',
-          [s.flexJustifyAround]: props.justify === 'around',
-          [s.flexAlignStart]: props.align === 'start',
-          [s.flexAlignEnd]: props.align === 'end',
-          [s.flexAlignCenter]: props.align === 'center',
-          [s.flexAlignStretch]: props.align === 'stretch',
-          [s.flexWrap]: typeof props.wrap === 'boolean' ? props.wrap : props.wrap === 'wrap',
-          [s.flexWrapNowrap]: props.wrap === 'nowrap',
-          [s.flexWrapReverse]: props.wrap === 'wrap-reverse',
-          [s.fullWidth]: props.fullWidth,
-          [s.fullHeight]: props.fullHeight,
+          [s.flexRow]: direction === 'row',
+          [s.flexColumn]: direction === 'column',
+          [s.flexJustifyStart]: justify === 'start',
+          [s.flexJustifyEnd]: justify === 'end',
+          [s.flexJustifyCenter]: justify === 'center',
+          [s.flexJustifyBetween]: justify === 'between',
+          [s.flexJustifyAround]: justify === 'around',
+          [s.flexAlignStart]: align === 'start',
+          [s.flexAlignEnd]: align === 'end',
+          [s.flexAlignCenter]: align === 'center',
+          [s.flexAlignStretch]: align === 'stretch',
+          [s.flexWrap]: typeof wrap === 'boolean' ? wrap : wrap === 'wrap',
+          [s.flexWrapNowrap]: wrap === 'nowrap',
+          [s.flexWrapReverse]: wrap === 'wrap-reverse',
+          [s.fullWidth]: fullWidth,
+          [s.fullHeight]: fullHeight,
         },
-        props.className,
+        className,
       ),
       style: {
-        gap: props.gap,
-        ...props.style,
+        gap,
+        ...style,
       },
     },
-    props.children,
+    children,
   )
 }
