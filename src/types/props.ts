@@ -4,6 +4,13 @@ export interface BaseProps {
   className?: string
   style?: React.CSSProperties
 }
+
+export interface BaseLayoutProps extends BaseProps {
+  fullWidth?: boolean
+  fullHeight?: boolean
+  position?: 'relative' | 'absolute' | 'fixed' | 'static'
+}
+
 export interface ILayoutProps {
   children: React.ReactNode
 }
