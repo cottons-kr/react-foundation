@@ -8,7 +8,6 @@ export interface BaseProps {
 export interface BaseLayoutProps extends BaseProps, React.HTMLAttributes<HTMLDivElement> {
   fullWidth?: boolean
   fullHeight?: boolean
-  position?: 'relative' | 'absolute' | 'fixed' | 'static'
 }
 
 export interface ILayoutProps {

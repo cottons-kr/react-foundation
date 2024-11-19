@@ -29,7 +29,6 @@ export function Flex(props: FlexProps) {
       ...rest,
       className: cn(
         s.flex,
-        s[props.position || 'static'],
         {
           [s.flexRow]: direction === 'row',
           [s.flexColumn]: direction === 'column',

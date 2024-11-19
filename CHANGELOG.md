@@ -1,3 +1,7 @@
+## 0.2.2 (2024-11-19)
+
+- `Flex` 계열 컴포넌트에 `position` Prop 제거
+
 ## 0.2.1 (2024-11-19)
 
 - `Flex` 계열 컴포넌트 Prop은 `HTMLAttributes<HTMLDivElement>`을 확장하도록 변경
