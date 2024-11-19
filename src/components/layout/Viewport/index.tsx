@@ -11,16 +11,25 @@ export interface ViewportProps extends BaseLayoutProps {
 }
 
 export function Viewport(props: ViewportProps) {
+  const {
+    children, className, style,
+    direction,
+    fullWidth, fullHeight,
+    ...rest
+  } = props
+
   return <>
     <div
+      {...rest}
       className={cn(
-        props.className,
-        s[props.direction || 'none'],
+        className,
+        s[direction || 'none'],
         {
-          [s.fullWidth]: props.fullWidth,
-          [s.fullHeight]: props.fullHeight,
+          [s.fullWidth]: fullWidth,
+          [s.fullHeight]: fullHeight,
         },
       )}
-    >{props.children}</div>
+      style={style}
+    >{children}</div>
   </>
 }
