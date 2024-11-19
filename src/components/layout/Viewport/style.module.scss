@@ -1,0 +1,19 @@
+.row {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.column {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.all {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.none {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
