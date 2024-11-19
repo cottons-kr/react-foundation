@@ -1,3 +1,7 @@
+## 0.2.4 (2024-11-19)
+
+- `HStack`, `VStack`은 기본적으로 `fullWidth` 적용
+
 ## 0.2.3 (2024-11-19)
 
 - `Viewport` 계열 컴포넌트 `BaseLayoutProps` 대응

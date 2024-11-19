@@ -4,6 +4,6 @@ import { Flex, FlexProps } from '../Flex'
 
 export function VStack(props: FlexProps) {
   return <>
-    <Flex {...props} direction='column' />
+    <Flex {...props} fullWidth direction='column' />
   </>
 }
