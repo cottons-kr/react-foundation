@@ -9,6 +9,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "rimraf dist && rollup -c && tsc --project tsconfig.lib.json --emitDeclarationOnly"
