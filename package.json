@@ -1,16 +1,20 @@
 {
   "name": "@cottons-kr/react-foundation",
   "type": "module",
-  "version": "0.2.4",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
-  "style": "dist/styles.css",
+  "version": "0.3.0",
   "files": [
     "dist"
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.esm.js"
+    },
+    "./styles.css": "./dist/styles.css"
   },
   "scripts": {
     "prepublishOnly": "npm run build",

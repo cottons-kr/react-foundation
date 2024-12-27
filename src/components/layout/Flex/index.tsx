@@ -10,7 +10,7 @@ export interface FlexProps extends BaseLayoutProps {
   justify?: 'start' | 'end' | 'center' | 'between' | 'around'
   align?: 'start' | 'end' | 'center' | 'stretch'
   wrap?: 'wrap' | 'nowrap' | 'wrap-reverse' | boolean
-  gap?: number
+  gap?: string | number
   tag?: keyof JSX.IntrinsicElements
   children?: React.ReactNode
 }
@@ -19,7 +19,7 @@ export function Flex(props: FlexProps) {
   const {
     tag, children, className, style,
     direction, justify, align, wrap, gap,
-    fullWidth, fullHeight,
+    fitContent, fullWidth, fullHeight,
     ...rest
   } = props
 
@@ -44,6 +44,7 @@ export function Flex(props: FlexProps) {
           [s.flexWrap]: typeof wrap === 'boolean' ? wrap : wrap === 'wrap',
           [s.flexWrapNowrap]: wrap === 'nowrap',
           [s.flexWrapReverse]: wrap === 'wrap-reverse',
+          [s.fitContent]: fitContent,
           [s.fullWidth]: fullWidth,
           [s.fullHeight]: fullHeight,
         },

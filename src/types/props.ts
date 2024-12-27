@@ -6,6 +6,7 @@ export interface BaseProps {
 }
 
 export interface BaseLayoutProps extends BaseProps, React.HTMLAttributes<HTMLDivElement> {
+  fitContent?: boolean
   fullWidth?: boolean
   fullHeight?: boolean
 }

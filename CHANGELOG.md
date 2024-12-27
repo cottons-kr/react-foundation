@@ -1,3 +1,9 @@
+## 0.3.0 (2024-12-27)
+
+- `Flex` 계열 컴포넌트에 `fitContent` Prop 추가
+- `gap` Prop은 이제 `string | number` 허용
+- `package.json`에 `exports` 필드 추가
+
 ## 0.2.4 (2024-11-19)
 
 - `HStack`, `VStack`은 기본적으로 `fullWidth` 적용
