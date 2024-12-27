@@ -19,13 +19,13 @@ const config = defineConfig([
     input: 'src/index.ts',
     output: [
       {
-        file: packageJson.main,
+        file: packageJson.exports['.'].require,
         format: 'cjs',
         sourcemap: true,
         exports: 'named',
       },
       {
-        file: packageJson.module,
+        file: packageJson.exports['.'].import,
         format: 'esm',
         sourcemap: true,
         exports: 'named',
@@ -49,7 +49,6 @@ const config = defineConfig([
         ],
         extract: 'styles.css',
         minimize: true,
-        
       }),
       swc({
         jsc: {
