@@ -41,7 +41,9 @@ const config = defineConfig([
       resolve({ extensions }),
       commonjs(),
       postcss({
-        modules: true,
+        modules: {
+          generateScopedName: '[hash:base64:5]',
+        },
         use: [
           ['sass', {
             silenceDeprecations: ['legacy-js-api'],
@@ -49,6 +51,7 @@ const config = defineConfig([
         ],
         extract: 'styles.css',
         minimize: true,
+        sourceMap: true,
       }),
       swc({
         jsc: {
