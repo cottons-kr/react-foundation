@@ -1,6 +1,6 @@
 {
   "name": "@cottons-kr/react-foundation",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "files": [
     "dist"
   ],
@@ -10,8 +10,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.esm.js"
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
     },
     "./styles.css": "./dist/styles.css"
   },

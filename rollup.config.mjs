@@ -4,6 +4,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import postcss from 'rollup-plugin-postcss'
 import swcPkg from 'rollup-plugin-swc'
+import injectCSS from './scripts/inject-css.mjs'
 
 import { readFileSync } from 'fs'
 
@@ -64,6 +65,7 @@ const config = defineConfig([
         sourceMaps: true,
         minify: true,
       }),
+      injectCSS(),
     ],
   }
 ])
