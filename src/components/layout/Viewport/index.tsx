@@ -16,6 +16,7 @@ export function Viewport(props: ViewportProps) {
     children, className, style,
     direction,
     fullWidth, fullHeight,
+    onScrollChange,
     ...rest
   } = props
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -25,11 +26,17 @@ export function Viewport(props: ViewportProps) {
     if (!element) return
 
     const { scrollLeft, scrollWidth, clientWidth } = element
+    
+    if (scrollWidth <= clientWidth) {
+      onScrollChange?.(false, false)
+      return
+    }
+    
     const newIsAtStart = scrollLeft <= 0
     const newIsAtEnd = Math.abs(scrollWidth - clientWidth - scrollLeft) <= 1
 
-    props.onScrollChange?.(newIsAtStart, newIsAtEnd)
-  }, [scrollRef, props.onScrollChange])
+    onScrollChange?.(newIsAtStart, newIsAtEnd)
+  }, [scrollRef, onScrollChange])
 
   useEffect(() => {
     const element = scrollRef.current
@@ -37,7 +44,7 @@ export function Viewport(props: ViewportProps) {
     checkScrollPosition()
 
     return () => element?.removeEventListener('scroll', checkScrollPosition)
-  }, [])
+  }, [scrollRef, checkScrollPosition])
 
   return <>
     <div
