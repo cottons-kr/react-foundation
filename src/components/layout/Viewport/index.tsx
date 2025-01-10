@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { forwardRef, useCallback, useEffect, useRef } from 'react'
 
 import { BaseLayoutProps } from '../../../types/props'
 import cn from 'classnames'
@@ -17,7 +17,21 @@ export interface ViewportProps extends BaseLayoutProps {
   children?: React.ReactNode
 }
 
-export function Viewport(props: ViewportProps) {
+function useMergedRef<T>(...refs: (React.Ref<T> | null | undefined)[]) {
+  return useCallback((element: T | null) => {
+    refs.forEach(ref => {
+      if (!ref) return
+
+      if (typeof ref === 'function') {
+        ref(element)
+      } else {
+        (ref as React.MutableRefObject<T | null>).current = element
+      }
+    })
+  }, refs)
+}
+
+export const Viewport = forwardRef<HTMLDivElement, ViewportProps>((props, forwardedRef) => {
   const {
     children,
     className,
@@ -28,8 +42,10 @@ export function Viewport(props: ViewportProps) {
     onScrollChange,
     ...rest
   } = props
-  const scrollRef = useRef<HTMLDivElement>(null)
+  
+  const innerRef = useRef<HTMLDivElement>(null)
   const prevStateRef = useRef<ScrollState>({ isStart: false, isEnd: false, isMiddle: false })
+  const mergedRef = useMergedRef(innerRef, forwardedRef)
 
   const getScrollState = useCallback((element: HTMLDivElement): ScrollState => {
     const { scrollLeft, scrollWidth, clientWidth } = element
@@ -50,7 +66,7 @@ export function Viewport(props: ViewportProps) {
   }
 
   const checkScrollPosition = useCallback(() => {
-    const element = scrollRef.current
+    const element = innerRef.current
     if (!element) return
 
     const newState = getScrollState(element)
@@ -63,7 +79,7 @@ export function Viewport(props: ViewportProps) {
   }, [getScrollState, onScrollChange])
 
   useEffect(() => {
-    const element = scrollRef.current
+    const element = innerRef.current
     if (!element) return
 
     element.addEventListener('scroll', checkScrollPosition)
@@ -77,7 +93,7 @@ export function Viewport(props: ViewportProps) {
   return <>
     <div
       {...rest}
-      ref={scrollRef}
+      ref={mergedRef}
       className={cn(
         className,
         s[direction],
@@ -91,4 +107,4 @@ export function Viewport(props: ViewportProps) {
       {children}
     </div>
   </>
-}
+})
