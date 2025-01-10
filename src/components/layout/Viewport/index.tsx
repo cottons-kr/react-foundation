@@ -8,11 +8,12 @@ import s from './style.module.scss'
 interface ScrollState {
   isStart: boolean
   isEnd: boolean
+  isMiddle: boolean
 }
 
 export interface ViewportProps extends BaseLayoutProps {
   direction?: 'row' | 'column' | 'all' | 'none'
-  onScrollChange?: (isStart: boolean, isEnd: boolean) => unknown
+  onScrollChange?: (isStart: boolean, isEnd: boolean, isMiddle: boolean) => void
   children?: React.ReactNode
 }
 
@@ -28,18 +29,19 @@ export function Viewport(props: ViewportProps) {
     ...rest
   } = props
   const scrollRef = useRef<HTMLDivElement>(null)
-  const prevStateRef = useRef<ScrollState>({ isStart: false, isEnd: false })
+  const prevStateRef = useRef<ScrollState>({ isStart: false, isEnd: false, isMiddle: false })
 
   const getScrollState = useCallback((element: HTMLDivElement): ScrollState => {
     const { scrollLeft, scrollWidth, clientWidth } = element
     
     if (scrollWidth <= clientWidth) {
-      return { isStart: false, isEnd: false }
+      return { isStart: false, isEnd: false, isMiddle: false }
     }
     
     return {
       isStart: scrollLeft <= 0,
-      isEnd: Math.abs(scrollWidth - clientWidth - scrollLeft) <= 1
+      isEnd: Math.abs(scrollWidth - clientWidth - scrollLeft) <= 1,
+      isMiddle: scrollLeft > 0 && Math.abs(scrollWidth - clientWidth - scrollLeft) > 1
     }
   }, [])
 
@@ -56,7 +58,7 @@ export function Viewport(props: ViewportProps) {
 
     if (shouldUpdateState(newState, prevState)) {
       prevStateRef.current = newState
-      onScrollChange?.(newState.isStart, newState.isEnd)
+      onScrollChange?.(newState.isStart, newState.isEnd, newState.isMiddle)
     }
   }, [getScrollState, onScrollChange])
 
